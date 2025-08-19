@@ -1,0 +1,145 @@
+name: Create 100 Custom Issues
+
+on:
+  workflow_dispatch:
+
+permissions:
+  issues: write
+
+jobs:
+  post_issues:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Post 100 Customized Issues with Metadata
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const issues = [
+              { title: "🐛 Bug: Login broken", body: "Login fails on mobile.", labels: ["bug", "urgent"] },
+              { title: "🎨 UI: Improve footer", body: "Footer is misaligned on small screens.", labels: ["enhancement", "design"] },
+              { title: "🚀 Feature: Dark mode", body: "Add toggle for dark/light theme.", labels: ["feature", "frontend"] },
+              { title: "📦 Dependency: React 18", body: "Update to React 18 safely.", labels: ["update"] },
+              { title: "🛠️ Refactor: Auth logic", body: "Split logic for better readability.", labels: ["refactor"] },
+              { title: "🧪 Tests: Signup flow", body: "Write unit tests for sign-up.", labels: ["test"] },
+              { title: "📝 Docs: Setup guide", body: "Add dev setup steps to README.", labels: ["documentation"] },
+              { title: "🔒 Security: Rate limit", body: "Protect login from brute-force.", labels: ["security"] },
+              { title: "🌐 i18n: Add Spanish", body: "Translate UI to Spanish.", labels: ["localization"] },
+              { title: "📊 Analytics: Clicks", body: "Track CTA button clicks.", labels: ["analytics"] },
+              { title: "🐛 Bug: Signup throttle", body: "Signup API occasionally times out.", labels: ["bug"] },
+              { title: "🎨 UI: Button spacing", body: "Add margin between buttons on header.", labels: ["enhancement","design"] },
+              { title: "🚀 Feature: Email notifications", body: "Notify users on new messages.", labels: ["feature","backend"] },
+              { title: "📦 Dependency: Axios update", body: "Upgrade Axios to latest version.", labels: ["update"] },
+              { title: "🛠️ Refactor: Routing", body: "Simplify router architecture.", labels: ["refactor"] },
+              { title: "🧪 Tests: Dashboard", body: "Add integration tests for dashboard.", labels: ["test"] },
+              { title: "📝 Docs: API usage", body: "Document /v2 endpoints.", labels: ["documentation"] },
+              { title: "🔒 Security: CSP", body: "Add a strict Content Security Policy.", labels: ["security"] },
+              { title: "🌐 i18n: French", body: "Translate UI to French.", labels: ["localization"] },
+              { title: "📊 Analytics: Form Abandonment", body: "Track when users abandon forms.", labels: ["analytics"] },
+            
+              { title: "🐛 Bug: Unable to reset password", body: "Email link returns 404.", labels: ["bug"] },
+              { title: "🎨 UI: Modal styling", body: "Improve modal close icon alignment.", labels: ["enhancement"] },
+              { title: "🚀 Feature: Websocket support", body: "Replace polling with websockets.", labels: ["feature"] },
+              { title: "📦 Dependency: Tailwind 4", body: "Migrate styles to Tailwind 4.", labels: ["update"] },
+              { title: "🛠️ Refactor: API service", body: "Break monolith service into modules.", labels: ["refactor"] },
+              { title: "🧪 Tests: Error states", body: "Add tests for error edge cases.", labels: ["test"] },
+              { title: "📝 Docs: Component guide", body: "Document reusable components.", labels: ["documentation"] },
+              { title: "🔒 Security: XSS check", body: "Sanitize comment input boxes.", labels: ["security"] },
+              { title: "🌐 i18n: German", body: "Translate app to German.", labels: ["localization"] },
+              { title: "📊 Analytics: Page views", body: "Record views for About page.", labels: ["analytics"] },
+            
+              { title: "🐛 Bug: Logout doesn’t clear session", body: "Token persists after logout.", labels: ["bug"] },
+              { title: "🎨 UI: Header animation", body: "Smooth transition on scroll.", labels: ["enhancement","frontend"] },
+              { title: "🚀 Feature: 2FA support", body: "Add TOTP-based two-factor auth.", labels: ["feature","security"] },
+              { title: "📦 Dependency: ESLint config", body: "Sync ESLint with Airbnb rules.", labels: ["update"] },
+              { title: "🛠️ Refactor: Form hooks", body: "Use custom hooks for forms.", labels: ["refactor"] },
+              { title: "🧪 Tests: Auth middleware", body: "Create tests for auth guards.", labels: ["test"] },
+              { title: "📝 Docs: Contribution guide", body: "Add contributor instructions.", labels: ["documentation"] },
+              { title: "🔒 Security: CORS policy", body: "Restrict public origins.", labels: ["security"] },
+              { title: "🌐 i18n: Portuguese", body: "Add Portuguese translations.", labels: ["localization"] },
+              { title: "📊 Analytics: Error Events", body: "Track 500/404 events.", labels: ["analytics"] },
+            
+              { title: "🐛 Bug: Mobile nav opens twice", body: "Duplicate nav drawer event.", labels: ["bug"] },
+              { title: "🎨 UI: Improve card shadows", body: "Update shadow tokens for cards.", labels: ["enhancement"] },
+              { title: "🚀 Feature: Profile pictures", body: "Allow users to upload avatars.", labels: ["feature"] },
+              { title: "📦 Dependency: date-fns upgrade", body: "Replace moment.js with date-fns.", labels: ["update"] },
+              { title: "🛠️ Refactor: Request utils", body: "Merge duplicate request methods.", labels: ["refactor"] },
+              { title: "🧪 Tests: Notification bell", body: "Unit tests for bell component.", labels: ["test"] },
+              { title: "📝 Docs: ENV variables", body: "List and describe required env vars.", labels: ["documentation"] },
+              { title: "🔒 Security: SQL injection", body: "Escape inputs in search query.", labels: ["security"] },
+              { title: "🌐 i18n: Italian", body: "Translate app to Italian.", labels: ["localization"] },
+              { title: "📊 Analytics: Scroll depth", body: "Track how far users scroll.", labels: ["analytics"] },
+            
+              { title: "🐛 Bug: Date picker incorrect", body: "Date timezone mismatch.", labels: ["bug"] },
+              { title: "🎨 UI: Table responsive", body: "Make tables scroll horizontally.", labels: ["enhancement"] },
+              { title: "🚀 Feature: Password strength", body: "Add strength meter on signup.", labels: ["feature"] },
+              { title: "📦 Dependency: Prisma update", body: "Update Prisma schema.", labels: ["update"] },
+              { title: "🛠️ Refactor: Context providers", body: "Reorganize context providers.", labels: ["refactor"] },
+              { title: "🧪 Tests: Sidebar component", body: "Add tests for expanded/collapsed state.", labels: ["test"] },
+              { title: "📝 Docs: Release process", body: "Document how to release versions.", labels: ["documentation"] },
+              { title: "🔒 Security: JWT expiration", body: "Shorten token validity.", labels: ["security"] },
+              { title: "🌐 i18n: Japanese", body: "Translate app to Japanese.", labels: ["localization"] },
+              { title: "📊 Analytics: Button hovers", body: "Track hover events on buttons.", labels: ["analytics"] },
+            
+              { title: "🐛 Bug: Image upload fails", body: "Images >10MB fail silently.", labels: ["bug"] },
+              { title: "🎨 UI: Border radius update", body: "Use consistent rounded edges.", labels: ["enhancement"] },
+              { title: "🚀 Feature: Invite friends", body: "Allow users to send invites.", labels: ["feature"] },
+              { title: "📦 Dependency: Jest v30", body: "Upgrade Jest to v30.", labels: ["update"] },
+              { title: "🛠️ Refactor: Theme handling", body: "Centralize theme config.", labels: ["refactor"] },
+              { title: "🧪 Tests: Payment flow", body: "Integration tests for payment.", labels: ["test"] },
+              { title: "📝 Docs: Architecture", body: "Add overall system architecture.", labels: ["documentation"] },
+              { title: "🔒 Security: Audit dependencies", body: "Run npm audit and fix.", labels: ["security"] },
+              { title: "🌐 i18n: Chinese", body: "Translate app to Chinese.", labels: ["localization"] },
+              { title: "📊 Analytics: Referral clicks", body: "Track clicks from referral links.", labels: ["analytics"] },
+            
+              { title: "🐛 Bug: Safari layout glitch", body: "Background image flickers.", labels: ["bug"] },
+              { title: "🎨 UI: Add skeleton loaders", body: "Show loaders while fetching data.", labels: ["enhancement"] },
+              { title: "🚀 Feature: User tags", body: "Allow admins to tag users.", labels: ["feature"] },
+              { title: "📦 Dependency: Lodash cleanup", body: "Remove unused lodash methods.", labels: ["update"] },
+              { title: "🛠️ Refactor: Pagination logic", body: "Move pagination to shared util.", labels: ["refactor"] },
+              { title: "🧪 Tests: File upload", body: "Test file upload component.", labels: ["test"] },
+              { title: "📝 Docs: Coding standards", body: "Describe our eslint/format rules.", labels: ["documentation"] },
+              { title: "🔒 Security: Use HTTPS only", body: "Force HTTPS on all endpoints.", labels: ["security"] },
+              { title: "🌐 i18n: Korean", body: "Add Korean translation.", labels: ["localization"] },
+              { title: "📊 Analytics: Time on page", body: "Track average time spent.", labels: ["analytics"] },
+            
+              { title: "🐛 Bug: Tooltip offset", body: "Tooltip appears in wrong position.", labels: ["bug"] },
+              { title: "🎨 UI: Improve spacing", body: "Increase line-height for text.", labels: ["enhancement"] },
+              { title: "🚀 Feature: Saved filters", body: "Allow users to save filters.", labels: ["feature"] },
+              { title: "📦 Dependency: Prettier plugin", body: "Install Prettier plugin for formatting.", labels: ["update"] },
+              { title: "🛠️ Refactor: AuthContext", body: "Split AuthContext into separate hooks.", labels: ["refactor"] },
+              { title: "🧪 Tests: Loading states", body: "Check loading spinners visibility.", labels: ["test"] },
+              { title: "📝 Docs: Branch naming", body: "Add guidelines for branch naming.", labels: ["documentation"] },
+              { title: "🔒 Security: Secure headers", body: "Add helmet middleware.", labels: ["security"] },
+              { title: "🌐 i18n: Arabic", body: "Localize UI to Arabic.", labels: ["localization"] },
+              { title: "📊 Analytics: Conversion rate", body: "Track conversion events from landing.", labels: ["analytics"] }
+            ];
+
+            const milestoneTitle = "v1.0";
+            const assignees = ["VortexDev5"];
+
+            const { data: milestones } = await github.rest.issues.listMilestones({
+              owner: context.repo.owner,
+              repo: context.repo.repo
+            });
+
+            const milestone = milestones.find(m => m.title === milestoneTitle);
+
+            if (!milestone) {
+              throw new Error(`❌ Milestone '${milestoneTitle}' not found.`);
+            }
+
+            for (const issue of issues) {
+              const response = await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: issue.title,
+                body: issue.body,
+                labels: issue.labels,
+                assignees,
+                milestone: milestone.number
+              });
+
+              console.log(`✅ Created: ${response.data.title} — ${response.data.html_url}`);
+            }
